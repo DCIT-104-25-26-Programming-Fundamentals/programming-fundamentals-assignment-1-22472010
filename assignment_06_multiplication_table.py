@@ -55,3 +55,46 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def print_table(number):
+    print(f"Multiplication Table for {number}:")
+    for i in range(1, 13):
+        product = number * i
+        print(f"{number}  x  {i:<2} =  {product}")
+
+
+def print_tables_up_to_n(n):
+    for number in range(1, n + 1):
+        print_table(number)
+        print("-" * 29)
+
+
+def main():
+    print("=" * 50)
+    print("MULTIPLICATION TABLE GENERATOR")
+    print("=" * 50)
+
+    try:
+        number = int(input("\nEnter a number: "))
+    except ValueError:
+        print("Error: Please enter a valid integer.")
+        return
+
+    print()
+    print_table(number)
+
+    try:
+        n = int(input("\nEnter N to print tables from 1 to N: "))
+    except ValueError:
+        print("Error: N must be a positive integer.")
+        return
+
+    if n <= 0:
+        print("Error: N must be a positive integer.")
+        return
+
+    print()
+    print_tables_up_to_n(n)
+
+
+if __name__ == "__main__":
+    main()
