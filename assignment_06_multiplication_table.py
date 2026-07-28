@@ -55,45 +55,47 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
-def print_table(number):
-    print(f"Multiplication Table for {number}:")
+
+# -----------------------------------------------------------------------------
+# PART A — Single Table
+# -----------------------------------------------------------------------------
+def print_single_table(num):
+    """Prints the multiplication table for a given number from 1 to 12."""
+    print(f"\nMultiplication Table for {num}:")
     for i in range(1, 13):
-        product = number * i
-        print(f"{number}  x  {i:<2} =  {product}")
+        print(f"{num}  x  {i:<2} =  {num * i}")
 
 
+# -----------------------------------------------------------------------------
+# PART B — Bonus: Tables from 1 to N
+# -----------------------------------------------------------------------------
 def print_tables_up_to_n(n):
-    for number in range(1, n + 1):
-        print_table(number)
-        print("-" * 29)
+    """Prints the multiplication table for every number from 1 to N."""
+    for num in range(1, n + 1):
+        print_single_table(num)
+        if num < n:
+            print("-" * 27)
 
 
 def main():
-    print("=" * 50)
-    print("MULTIPLICATION TABLE GENERATOR")
-    print("=" * 50)
-
+    # Input validation: Ensure user enters a positive integer
     try:
-        number = int(input("\nEnter a number: "))
+        num = int(input("Enter a positive integer: "))
+        if num <= 0:
+            print("Error: Please enter a positive integer greater than 0.")
+            return
     except ValueError:
-        print("Error: Please enter a valid integer.")
+        print("Error: Invalid input. Please enter an integer.")
         return
 
-    print()
-    print_table(number)
+    # Part A: Single Table
+    print_single_table(num)
 
-    try:
-        n = int(input("\nEnter N to print tables from 1 to N: "))
-    except ValueError:
-        print("Error: N must be a positive integer.")
-        return
-
-    if n <= 0:
-        print("Error: N must be a positive integer.")
-        return
-
-    print()
-    print_tables_up_to_n(n)
+    # Part B: Tables 1 to N
+    print("\n" + "=" * 27)
+    print(f"GENERATING ALL TABLES FROM 1 TO {num}")
+    print("=" * 27)
+    print_tables_up_to_n(num)
 
 
 if __name__ == "__main__":
