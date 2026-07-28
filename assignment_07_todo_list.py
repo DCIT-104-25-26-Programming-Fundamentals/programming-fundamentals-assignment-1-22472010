@@ -79,61 +79,9 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
-# =============================================================================
-# PROGRAMMING FUNDAMENTALS — Assignment 7
-# =============================================================================
-#
-# TASK: Console-Based To-Do List Application
-# =============================================================================
 
-
-def add_task(tasks):
-    """Prompt for a task description, add it to the list, and confirm."""
-    description = input("Enter task: ").strip()
-
-    if not description:
-        print("Error: Task cannot be empty.")
-        return
-
-    tasks.append(description)
-    print(f'Task added: "{description}"')
-
-
-def view_tasks(tasks):
-    """Display all tasks, numbered from 1. Show a message if empty."""
-    if not tasks:
-        print("Your task list is empty. Add a task to get started!")
-        return
-
-    print("Your Tasks:")
-    for i, task in enumerate(tasks, start=1):
-        print(f"{i}. {task}")
-
-
-def delete_task(tasks):
-    """Show tasks, ask which number to remove, and remove it."""
-    if not tasks:
-        print("Your task list is empty. Nothing to delete.")
-        return
-
-    view_tasks(tasks)
-
-    choice = input("Enter task number to delete: ").strip()
-    if not choice.isdigit():
-        print("Error: Please enter a valid task number.")
-        return
-
-    index = int(choice)
-    if index < 1 or index > len(tasks):
-        print(f"Error: {index} is not a valid task number.")
-        return
-
-    removed = tasks.pop(index - 1)
-    print(f'Task "{removed}" has been removed.')
-
-
-def print_menu():
-    """Display the menu options."""
+def display_menu():
+    """Displays the main menu options."""
     print("\n============================")
     print("     TO-DO LIST MENU")
     print("============================")
@@ -143,24 +91,62 @@ def print_menu():
     print("4. Quit")
 
 
+def add_task(todo_list):
+    """Prompts the user for a task and appends it to the list."""
+    task = input("Enter task: ").strip()
+    if task:
+        todo_list.append(task)
+        print(f'Task added: "{task}"')
+    else:
+        print("Task description cannot be empty.")
+
+
+def view_tasks(todo_list):
+    """Displays all current tasks numbered from 1, or an empty list message."""
+    if not todo_list:
+        print("Your to-do list is empty.")
+    else:
+        print("Your Tasks:")
+        for index, task in enumerate(todo_list, start=1):
+            print(f"{index}. {task}")
+
+
+def delete_task(todo_list):
+    """Displays tasks and removes a task by its 1-based index."""
+    if not todo_list:
+        print("Your to-do list is empty. Nothing to delete.")
+        return
+
+    view_tasks(todo_list)
+    try:
+        task_num = int(input("Enter task number to delete: "))
+        if 1 <= task_num <= len(todo_list):
+            removed_task = todo_list.pop(task_num - 1)
+            print(f'Task "{removed_task}" has been removed.')
+        else:
+            print("Error: Invalid task number.")
+    except ValueError:
+        print("Error: Please enter a valid number.")
+
+
 def main():
-    tasks = []
+    todo_list = []
 
     while True:
-        print_menu()
+        display_menu()
         choice = input("Enter your choice (1-4): ").strip()
 
         if choice == "1":
-            add_task(tasks)
+            add_task(todo_list)
         elif choice == "2":
-            view_tasks(tasks)
+            view_tasks(todo_list)
         elif choice == "3":
-            delete_task(tasks)
+            delete_task(todo_list)
         elif choice == "4":
             print("Goodbye!")
             break
         else:
-            print("Error: Invalid choice. Please enter a number between 1 and 4.")
+            print("Invalid choice. Please select an option between 1 and 4.")
 
 
 if __name__ == "__main__":
