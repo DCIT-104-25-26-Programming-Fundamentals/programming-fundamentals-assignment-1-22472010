@@ -49,71 +49,59 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+# -----------------------------------------------------------------------------
 # PART A — Print the First N Terms
 # -----------------------------------------------------------------------------
-def print_first_n_terms(n):
-    """Print the first N terms of the Fibonacci sequence on one line."""
+def print_fibonacci_sequence(n):
+    """
+    Generates and prints the first N numbers of the Fibonacci sequence on one line.
+    Requires N to be a positive integer.
+    """
     if n <= 0:
-        print("Error: N must be a positive integer.")
+        print("Error: Number of terms must be a positive integer.")
         return
- 
+
     sequence = []
     a, b = 0, 1
     for _ in range(n):
         sequence.append(a)
         a, b = b, a + b
- 
-    print("Fibonacci sequence:", " ".join(str(num) for num in sequence))
- 
- 
+
+    print("Fibonacci sequence:", " ".join(map(str, sequence)))
+
+
 # -----------------------------------------------------------------------------
 # PART B — Check if a Number Belongs to the Sequence
 # -----------------------------------------------------------------------------
 def is_fibonacci_number(num):
-    """Return True if num is a Fibonacci number, using a loop (no recursion)."""
+    """
+    Determines whether a given non-negative number belongs to the Fibonacci sequence.
+    Uses an iterative loop.
+    """
     if num < 0:
         return False
- 
+
     a, b = 0, 1
-    while a <= num:
-        if a == num:
-            return True
+    while a < num:
         a, b = b, a + b
- 
-    return False
- 
- 
-# =============================================================================
-# MAIN PROGRAM
-# =============================================================================
+
+    return a == num
+
+
 def main():
-    print("=" * 50)
-    print("FIBONACCI SEQUENCE GENERATOR")
-    print("=" * 50)
- 
-    # --- Part A ---
-    try:
-        n = int(input("\nHow many terms? "))
-    except ValueError:
-        n = -1  # will trigger the error message below
- 
-    if n <= 0:
-        print("Error: N must be a positive integer.")
+    # --- PART A Execution ---
+    n_terms = int(input("How many terms? "))
+    print_fibonacci_sequence(n_terms)
+
+    print()
+
+    # --- PART B Execution ---
+    check_num = int(input("Enter a number to check: "))
+    if is_fibonacci_number(check_num):
+        print(f"{check_num} is a Fibonacci number.")
     else:
-        print_first_n_terms(n)
- 
-    # --- Part B ---
-    try:
-        num = int(input("\nEnter a number to check: "))
-    except ValueError:
-        print("Error: Please enter a valid integer.")
-        return
- 
-    if is_fibonacci_number(num):
-        print(f"{num} is a Fibonacci number.")
-    else:
-        print(f"{num} is NOT a Fibonacci number.")
- 
- 
+        print(f"{check_num} is NOT a Fibonacci number.")
+
+
 if __name__ == "__main__":
     main()
