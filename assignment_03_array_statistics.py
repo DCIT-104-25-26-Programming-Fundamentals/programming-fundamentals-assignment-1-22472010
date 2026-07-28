@@ -39,28 +39,61 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
-def is_prime(number):
-    """
-    Checks if a given whole number is prime.
-    Returns True if prime, False otherwise.
-    """
-    # Numbers less than 2 are not prime
-    if number < 2:
-        return False
+def calculate_sum(numbers):
+    """Calculates and returns the sum of numbers using a loop."""
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+
+def calculate_average(numbers):
+    """Calculates and returns the average of numbers."""
+    total = calculate_sum(numbers)
+    return total / len(numbers)
+
+
+def find_maximum(numbers):
+    """Finds and returns the maximum value using a loop."""
+    max_val = numbers[0]
+    for num in numbers[1:]:
+        if num > max_val:
+            max_val = num
+    return max_val
+
+
+def find_minimum(numbers):
+    """Finds and returns the minimum value using a loop."""
+    min_val = numbers[0]
+    for num in numbers[1:]:
+        if num < min_val:
+            min_val = num
+    return min_val
+
+
+def main():
+    n = int(input("How many numbers? "))
     
-    # Check for factors from 2 up to the square root of the number
-    for i in range(2, int(number ** 0.5) + 1):
-        if number % i == 0:
-            return False  # Found a divisor, so it's not prime
-            
-    return True
+    # Check if N is a positive integer
+    if n <= 0:
+        print("Error: Number of elements must be greater than 0.")
+        return
+
+    numbers = []
+    for i in range(1, n + 1):
+        num = float(input(f"Enter number {i}: "))
+        # Format whole numbers as ints for clean output
+        if num.is_integer():
+            num = int(num)
+        numbers.append(num)
+
+    print("\nResults:")
+    print(f"Sum:     {calculate_sum(numbers)}")
+    print(f"Average: {calculate_average(numbers)}")
+    print(f"Maximum: {find_maximum(numbers)}")
+    print(f"Minimum: {find_minimum(numbers)}")
 
 
-# Main block
 if __name__ == "__main__":
-    num = int(input("Enter a number: "))
-    
-    if is_prime(num):
-        print(f"{num} is a prime number.")
-    else:
+    main()
         print(f"{num} is NOT a prime number.")
